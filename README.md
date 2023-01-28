@@ -5,7 +5,7 @@ The application utilizes Django's built-in functionality for handling user authe
 This project is not based on websocket.
 The realtime chatting is possible using simple python logic.
 =============================================================
-In this project the Registration is through the admin page of django.This project only provides the interface for chat functionality.
+In this project the Registration is through the django admin page .This project only provides the interface for chat functionality.
 Adding a friend  for user is done manually though the django admin site.
 =============================================================
 ==========       Models    =======================
