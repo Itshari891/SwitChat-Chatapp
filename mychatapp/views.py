@@ -1,9 +1,33 @@
 from django.shortcuts import render,redirect
 from .models import Friend,Profile,Message
-from .forms import MessageForm
+from .forms import MessageForm,LoginForm
 from django.http import JsonResponse
 import json
+from django.views.generic import FormView
+from django.contrib.auth import authenticate,login
 # Create your views here.
+
+class LoginView(FormView):
+    template_name = "mychatapp/login.html"
+    form_class = LoginForm
+
+    def post(self, request, *args, **kwargs):
+        form = LoginForm(request.POST)
+        if form.is_valid():
+            username = form.cleaned_data.get("username")
+            password = form.cleaned_data.get("password")
+            user = authenticate(request, username=username, password=password)
+            if user:
+                login(request, user)
+                user=request.user.profile
+                friends=user.friends.all()
+                context={"user":user,"friends":friends}
+                return render(request,"mychatapp/index.html",context)
+            else:
+                return render(request, "login.html", {"form": form})
+
+
+
 
 def index(request):
     user=request.user.profile
