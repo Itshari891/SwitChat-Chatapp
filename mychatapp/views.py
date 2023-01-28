@@ -24,7 +24,7 @@ class LoginView(FormView):
                 context={"user":user,"friends":friends}
                 return render(request,"mychatapp/index.html",context)
             else:
-                return render(request, "login.html", {"form": form})
+                return render(request, "mychatapp/login.html", {"form": form})
 
 
 
